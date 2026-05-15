@@ -30,7 +30,7 @@ body {
 }
 .sidebar__brand-icon {
   width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
-  background: linear-gradient(135deg, #E53935, #C62828);
+  background: linear-gradient(135deg, #8FCAD7, #6CA5B3);
   display: flex; align-items: center; justify-content: center;
   color: #FFF; font-size: 16px;
 }
@@ -44,21 +44,21 @@ body {
 }
 .sidebar__section-label {
   padding: 16px 12px 6px; font-size: var(--text-xs); font-weight: 600;
-  color: #64748B; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #8FCAD7; text-transform: uppercase; letter-spacing: 0.06em;
 }
 .sidebar__item {
   display: flex; align-items: center; gap: 12px;
   padding: 10px 12px; border-radius: 8px;
-  color: #94A3B8; text-decoration: none;
+  color: #C5E5EC; text-decoration: none;
   font-size: var(--text-sm); font-weight: 400;
   transition: all 0.2s ease; white-space: nowrap;
 }
 .sidebar__item i { font-size: 18px; width: 20px; text-align: center; flex-shrink: 0; }
-.sidebar__item:hover { background: var(--bg-sidebar-hover); color: #E2E8F0; }
+.sidebar__item:hover { background: var(--bg-sidebar-hover); color: #FFF; }
 .sidebar__item--active {
   background: var(--bg-sidebar-active) !important;
-  color: #FFF !important; font-weight: 500;
-  box-shadow: 0 2px 8px rgba(229,57,53,0.4);
+  color: #1E3B40 !important; font-weight: 600;
+  box-shadow: 0 2px 8px rgba(108,165,179,0.4);
 }
 
 .sidebar__user {
@@ -67,13 +67,13 @@ body {
 }
 .sidebar__user-avatar {
   width: 36px; height: 36px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-700));
+  background: linear-gradient(135deg, #8FCAD7, #6CA5B3);
   display: flex; align-items: center; justify-content: center;
-  color: #FFF; font-weight: 600; font-size: var(--text-sm); flex-shrink: 0;
+  color: #1E3B40; font-weight: 600; font-size: var(--text-sm); flex-shrink: 0;
 }
 .sidebar__user-info { overflow: hidden; }
 .sidebar__user-name { font-size: var(--text-sm); font-weight: 500; color: #FFF; }
-.sidebar__user-role { font-size: var(--text-xs); color: #94A3B8; }
+.sidebar__user-role { font-size: var(--text-xs); color: #8FCAD7; }
 
 /* ====== Main Content ====== */
 .main-content {
@@ -126,7 +126,7 @@ body {
 
 /* ====== Welcome Banner ====== */
 .welcome-banner {
-  background: linear-gradient(135deg, #E53935 0%, #8B1B18 100%);
+  background: linear-gradient(135deg, #6CA5B3 0%, #265A66 100%);
   border-radius: 16px; padding: 32px; color: #FFF; margin-bottom: 24px;
   position: relative; overflow: hidden;
 }

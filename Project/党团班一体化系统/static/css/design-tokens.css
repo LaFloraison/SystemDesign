@@ -35,12 +35,24 @@
   --color-info-bg:      #EFF6FF;
   --color-info-text:    #1E40AF;
 
+  /* === Cool Accent (Teal/Sage) === */
+  --color-cool-200: #C5E5EC;
+  --color-cool-300: #8FCAD7;
+  --color-cool-400: #7DBDC8;
+  --color-cool-500: #6CA5B3;
+  --color-cool-600: #5A8E9A;
+  --color-cool-700: #487882;
+  --color-sage-200: #CDDDD3;
+  --color-sage-300: #9CBBB3;
+  --color-sage-400: #9CBBA8;
+  --color-sage-500: #7DA38E;
+
   /* === Backgrounds === */
   --bg-page:           #F3F4F6;
   --bg-card:           #FFFFFF;
-  --bg-sidebar:        #1E293B;
-  --bg-sidebar-hover:  #334155;
-  --bg-sidebar-active: #E53935;
+  --bg-sidebar:        #265A66;
+  --bg-sidebar-hover:  #1E4852;
+  --bg-sidebar-active: #8FCAD7;
   --bg-input:          #FFFFFF;
   --bg-input-disabled: #F9FAFB;
 
