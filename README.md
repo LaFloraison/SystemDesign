@@ -71,6 +71,7 @@ python manage.py runserver
 
 ## 文档
 
-- [使用文档](使用文档.md) — 各角色操作指南
-- [设计系统](documents/designs/design_system.md) — UI配色/组件/布局规范
-- [数据库SQL](党团班一体化系统.sql) — 原始数据库结构参考
+- [系统设计](.claude\CLAUDE.md) — 系统整体设计
+- [UI设计](Project\党团班一体化系统\documents\designs\design_system.md) — UI配色/组件/布局规范
+- [使用文档](Project\党团班一体化系统\使用文档.md) — 各角色操作指南
+
