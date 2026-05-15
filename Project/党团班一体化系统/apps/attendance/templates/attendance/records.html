@@ -3,18 +3,18 @@
 <h2>考勤记录</h2>
 {% if user.role == '团支书' %}
 <div class="mb-3">
-    <a href="{% url 'attendance_task_create' %}" class="btn btn-primary">创建考勤任务</a>
-    <a href="{% url 'leave_list' %}" class="btn btn-info">查看请假申请</a>
+    <a href="{% url 'attendance_task_create' %}" class="btn-gradient">创建考勤任务</a>
+    <a href="{% url 'leave_list' %}" class="btn-outline-red">查看请假申请</a>
 </div>
 {% endif %}
-<table class="table table-striped">
+<table class="table-modern">
     <thead><tr><th>日期</th><th>姓名</th><th>状态</th><th>备注</th><th>录入人</th></tr></thead>
     <tbody>
     {% for r in records %}
     <tr>
         <td>{{ r.attendance_date|date:"Y-m-d" }}</td>
         <td>{{ r.user.name }}</td>
-        <td>{% if r.status == '出勤' %}<span class="badge bg-success">出勤</span>{% elif r.status == '请假' %}<span class="badge bg-warning">请假</span>{% else %}<span class="badge bg-danger">缺勤</span>{% endif %}</td>
+        <td>{% if r.status == '出勤' %}<span class="badge-status badge-status--approved">出勤</span>{% elif r.status == '请假' %}<span class="badge-status badge-status--pending">请假</span>{% else %}<span class="badge-status badge-status--rejected">缺勤</span>{% endif %}</td>
         <td>{{ r.remark|default:"-" }}</td>
         <td>{{ r.recorder.name }}</td>
     </tr>
@@ -24,7 +24,7 @@
     </tbody>
 </table>
 {% if user.role != '团支书' %}
-<a href="{% url 'leave_apply' %}" class="btn btn-warning">申请请假</a>
-<a href="{% url 'leave_list' %}" class="btn btn-info">我的请假</a>
+<a href="{% url 'leave_apply' %}" class="btn-outline-red">申请请假</a>
+<a href="{% url 'leave_list' %}" class="btn-outline-red">我的请假</a>
 {% endif %}
 {% endblock %}

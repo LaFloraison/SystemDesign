@@ -14,7 +14,7 @@
         <td>{{ a.join_league_date|date:"Y-m-d"|default:"-" }}</td>
         <td>{{ a.join_party_date|date:"Y-m-d"|default:"-" }}</td>
         <td>{{ a.org_relation_status }}</td>
-        <td><a href="{% url 'party_archive_edit' a.user_id %}" class="btn btn-sm btn-primary">编辑</a></td>
+        <td><a href="{% url 'party_archive_edit' a.user_id %}" class="btn-gradient btn-sm">编辑</a></td>
     </tr>
     {% endfor %}
     </tbody>

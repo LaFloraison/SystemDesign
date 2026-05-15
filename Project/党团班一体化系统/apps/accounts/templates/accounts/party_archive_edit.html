@@ -10,8 +10,8 @@
     <div class="mb-3"><label class="form-label">转正时间</label>{{ form.full_member_date }}</div>
     <div class="mb-3"><label class="form-label">介绍人姓名</label>{{ form.introducer_name }}</div>
     <div class="mb-3"><label class="form-label">组织关系状态</label>{{ form.org_relation_status }}</div>
-    <button type="submit" class="btn btn-primary">保存</button>
-    <a href="{% url 'party_archive_list' %}" class="btn btn-secondary">取消</a>
+    <button type="submit" class="btn-gradient">保存</button>
+    <a href="{% url 'party_archive_list' %}" class="btn-ghost">取消</a>
 </form>
 </div>
 {% endblock %}

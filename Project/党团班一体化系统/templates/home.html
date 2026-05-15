@@ -1,44 +1,72 @@
 {% extends "base.html" %}
+{% block breadcrumb %}{% endblock %}
 {% block content %}
-<div class="text-center mt-5">
-    <h1>欢迎来到党团班一体化系统</h1>
-    {% if user.is_authenticated %}
-    <p class="lead">当前身份: {{ user.name }} ({{ user.role }}) - {{ user.class_name|default:"暂无班级" }}</p>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">通知中心</h5>
-                    <p class="card-text">查看班级通知和公告</p>
-                    <a href="/notifications/" class="btn btn-primary">查看通知</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">活动中心</h5>
-                    <p class="card-text">查看和报名班级活动</p>
-                    <a href="/activities/" class="btn btn-primary">查看活动</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">推优评议</h5>
-                    <p class="card-text">参与推优报名和投票</p>
-                    <a href="/recommendation/" class="btn btn-primary">查看推优</a>
-                </div>
-            </div>
-        </div>
+
+{% if user.is_authenticated %}
+
+<div class="welcome-banner animate-fade-in">
+    <h1>欢迎回来，{{ user.name }}</h1>
+    <p>党团班一体化管理系统</p>
+    <div class="welcome-banner__meta">
+        <span><i class="bi bi-person-badge"></i> {{ user.student_id }}</span>
+        <span><i class="bi bi-people"></i> {{ user.class_name|default:"未分班" }}</span>
+        <span><i class="bi bi-shield-check"></i> {{ user.role }}</span>
     </div>
-    {% else %}
-    <p class="lead">请先登录或注册</p>
-    <div class="mt-4">
-        <a href="/accounts/login/" class="btn btn-primary btn-lg me-3">登录</a>
-        <a href="/accounts/register/" class="btn btn-outline-primary btn-lg">注册</a>
-    </div>
-    {% endif %}
 </div>
+
+<div class="row stagger" style="margin-bottom:24px;">
+    <div class="col-6 col-md-3 mb-3">
+        <div class="stat-card">
+            <div class="stat-card__icon-wrap stat-card__icon-wrap--blue"><i class="bi bi-bell"></i></div>
+            <div><span class="stat-card__label">通知</span><span class="stat-card__value">--</span></div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+        <div class="stat-card">
+            <div class="stat-card__icon-wrap stat-card__icon-wrap--green"><i class="bi bi-calendar-check"></i></div>
+            <div><span class="stat-card__label">活动</span><span class="stat-card__value">--</span></div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+        <div class="stat-card">
+            <div class="stat-card__icon-wrap stat-card__icon-wrap--orange"><i class="bi bi-clipboard-data"></i></div>
+            <div><span class="stat-card__label">考勤</span><span class="stat-card__value">--</span></div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+        <div class="stat-card">
+            <div class="stat-card__icon-wrap stat-card__icon-wrap--red"><i class="bi bi-star"></i></div>
+            <div><span class="stat-card__label">推优</span><span class="stat-card__value">--</span></div>
+        </div>
+    </div>
+</div>
+
+<h4 class="mb-3" style="font-weight:600;">快捷操作</h4>
+<div class="quick-actions stagger">
+    <a href="/notifications/" class="quick-action-btn"><i class="bi bi-bell"></i> 查看通知</a>
+    <a href="/activities/" class="quick-action-btn"><i class="bi bi-calendar-event"></i> 浏览活动</a>
+    <a href="/attendance/" class="quick-action-btn"><i class="bi bi-clipboard-check"></i> 考勤记录</a>
+    {% if user.role == '团支书' %}
+    <a href="/attendance/tasks/create/" class="quick-action-btn"><i class="bi bi-plus-circle"></i> 创建考勤</a>
+    <a href="/recommendation/create/" class="quick-action-btn"><i class="bi bi-star"></i> 发布推优</a>
+    <a href="/publicity/create/" class="quick-action-btn"><i class="bi bi-megaphone"></i> 发布公示</a>
+    {% endif %}
+    {% if user.role == '班长' %}
+    <a href="/notifications/create/" class="quick-action-btn"><i class="bi bi-send"></i> 发布通知</a>
+    <a href="/activities/create/" class="quick-action-btn"><i class="bi bi-plus-circle"></i> 创建活动</a>
+    <a href="/accounts/member-changes/" class="quick-action-btn"><i class="bi bi-person-check"></i> 审核变更</a>
+    {% endif %}
+    <a href="/accounts/profile/" class="quick-action-btn"><i class="bi bi-person"></i> 个人信息</a>
+    <a href="/party/upload/" class="quick-action-btn"><i class="bi bi-upload"></i> 上传资料</a>
+</div>
+
+{% else %}
+
+<p style="color:var(--text-secondary);font-size:var(--text-sm);text-align:center;">Party-League-Class Integrated Management</p>
+<div class="d-grid gap-3 mt-4">
+    <a href="/accounts/login/" class="btn-gradient btn-lg" style="width:100%;justify-content:center;">登录</a>
+    <a href="/accounts/register/" class="btn-outline-red btn-lg" style="width:100%;justify-content:center;">注册</a>
+</div>
+
+{% endif %}
 {% endblock %}

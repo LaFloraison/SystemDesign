@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>活动列表</h2>
     {% if user.role == '班长' or user.role == '团支书' %}
-    <a href="{% url 'activity_create' %}" class="btn btn-primary">创建活动</a>
+    <a href="{% url 'activity_create' %}" class="btn-gradient">创建活动</a>
     {% endif %}
 </div>
 <div class="row">

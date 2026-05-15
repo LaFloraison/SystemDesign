@@ -3,7 +3,7 @@
 <h2>录入考勤 - {{ task.name }} ({{ task.attendance_time|date:"Y-m-d" }})</h2>
 <form method="post">
     {% csrf_token %}
-    <table class="table">
+    <table class="table-modern">
         <thead><tr><th>姓名</th><th>学号</th><th>状态</th><th>备注</th></tr></thead>
         <tbody>
         {% for c in classmates %}
@@ -22,6 +22,6 @@
         {% endfor %}
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary">保存考勤</button>
+    <button type="submit" class="btn-gradient">保存考勤</button>
 </form>
 {% endblock %}

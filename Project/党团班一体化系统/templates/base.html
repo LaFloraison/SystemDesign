@@ -4,60 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>党团班一体化系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    {% load static %}
+    <link href="{% static 'css/design-tokens.css' %}" rel="stylesheet">
+    <link href="{% static 'css/components.css' %}" rel="stylesheet">
+    <link href="{% static 'css/layout.css' %}" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="/">党团班一体化系统</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="/notifications/">通知</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/activities/">活动</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/attendance/">考勤</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/party/">党团资料</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/recommendation/">推优评议</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/publicity/">公示</a></li>
-                    {% endif %}
-                </ul>
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            {{ user.name }} ({{ user.role }})
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/accounts/profile/">个人信息</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/accounts/logout/">退出登录</a></li>
-                        </ul>
-                    </li>
-                    {% else %}
-                    <li class="nav-item"><a class="nav-link" href="/accounts/login/">登录</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/accounts/register/">注册</a></li>
-                    {% endif %}
-                </ul>
+
+{% if user.is_authenticated %}
+{# ===== AUTHENTICATED: Sidebar + Topbar Layout ===== #}
+<div class="app-layout" x-data="{ sidebarOpen: false }">
+    <div class="sidebar-overlay" :class="sidebarOpen && 'sidebar-overlay--visible'" @click="sidebarOpen = false"></div>
+
+    <aside class="sidebar" :class="sidebarOpen && 'sidebar--open'">
+        <div class="sidebar__brand">
+            <div class="sidebar__brand-icon"><i class="bi bi-building"></i></div>
+            <span class="sidebar__brand-text">党团班一体化</span>
+        </div>
+        <nav class="sidebar__nav">
+            <a href="/" class="sidebar__item {% if request.path == '/' %}sidebar__item--active{% endif %}">
+                <i class="bi bi-house-door-fill"></i> <span>首页</span>
+            </a>
+            <div class="sidebar__section-label">功能</div>
+            <a href="/notifications/" class="sidebar__item {% if '/notifications' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-bell-fill"></i> <span>通知管理</span>
+            </a>
+            <a href="/activities/" class="sidebar__item {% if '/activities' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-calendar-event-fill"></i> <span>活动管理</span>
+            </a>
+            <a href="/attendance/" class="sidebar__item {% if '/attendance' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-clipboard-check-fill"></i> <span>考勤管理</span>
+            </a>
+            <a href="/party/" class="sidebar__item {% if '/party' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-folder-fill"></i> <span>党团资料</span>
+            </a>
+            <a href="/recommendation/" class="sidebar__item {% if '/recommendation' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-star-fill"></i> <span>推优评议</span>
+            </a>
+            <a href="/publicity/" class="sidebar__item {% if '/publicity' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-megaphone-fill"></i> <span>公示管理</span>
+            </a>
+            <div class="sidebar__section-label">个人</div>
+            <a href="/accounts/profile/" class="sidebar__item {% if '/accounts/profile' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-person-fill"></i> <span>个人信息</span>
+            </a>
+            {% if user.role == '班长' %}
+            <a href="/accounts/member-changes/" class="sidebar__item {% if '/member-changes' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-person-check-fill"></i> <span>成员变更审核</span>
+            </a>
+            {% endif %}
+            {% if user.role == '团支书' %}
+            <a href="/accounts/party-archive/" class="sidebar__item {% if '/party-archive' in request.path %}sidebar__item--active{% endif %}">
+                <i class="bi bi-people-fill"></i> <span>党团员档案</span>
+            </a>
+            {% endif %}
+        </nav>
+        <div class="sidebar__user">
+            <div class="sidebar__user-avatar">{{ user.name|slice:":1" }}</div>
+            <div class="sidebar__user-info">
+                <div class="sidebar__user-name">{{ user.name }}</div>
+                <div class="sidebar__user-role">{{ user.role }}</div>
             </div>
         </div>
-    </nav>
+    </aside>
 
-    <div class="container mt-4">
+    <div class="main-content">
+        <header class="topbar">
+            <div class="topbar__left">
+                <button class="btn-ghost d-md-none" @click="sidebarOpen = !sidebarOpen">
+                    <i class="bi bi-list" style="font-size:20px"></i>
+                </button>
+                <nav class="topbar__breadcrumb d-none d-md-block">
+                    <a href="/">首页</a>{% block breadcrumb %}{% endblock %}
+                </nav>
+            </div>
+            <div class="topbar__right">
+                <span class="badge-status badge-status--{% if user.role == '普通学生' %}info{% else %}approved{% endif %}">
+                    {{ user.role }} · {{ user.class_name|default:"未分班" }}
+                </span>
+                <div class="dropdown">
+                    <button class="topbar__user-btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <div class="sidebar__user-avatar" style="width:28px;height:28px;font-size:12px">{{ user.name|slice:":1" }}</div>
+                        {{ user.name }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/accounts/profile/"><i class="bi bi-person"></i> 个人信息</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/accounts/logout/"><i class="bi bi-box-arrow-right"></i> 退出登录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="page-content">
+            {% if messages %}
+            <div style="position:fixed;top:80px;right:24px;z-index:999;max-width:380px">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show animate-fade-in" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+{% else %}
+{# ===== UNAUTHENTICATED: Gradient bg + centered card ===== #}
+<div class="auth-layout" style="min-height:100vh;">
+    <div class="auth-card animate-scale-in">
+        <div style="text-align:center;margin-bottom:20px;">
+            <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#E53935,#C62828);display:inline-flex;align-items:center;justify-content:center;color:#FFF;font-size:20px;margin-bottom:8px;">
+                <i class="bi bi-building"></i>
+            </div>
+            <h4 style="margin:0;color:var(--text-primary);">党团班一体化系统</h4>
+        </div>
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show animate-fade-in" role="alert" style="font-size:var(--text-sm);">
             {{ message }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
         {% endfor %}
         {% endif %}
+{% endif %}
 
         {% block content %}{% endblock %}
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% if user.is_authenticated %}
+        </div>{# .page-content #}
+    </div>{# .main-content #}
+</div>{# .app-layout #}
+{% else %}
+    </div>{# .auth-card #}
+</div>{# .auth-layout #}
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
 </body>
 </html>

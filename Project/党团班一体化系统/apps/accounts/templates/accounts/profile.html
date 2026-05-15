@@ -13,12 +13,12 @@
             <tr><th>入学时间</th><td>{{ user.enrollment_date|default:"未填写" }}</td></tr>
             <tr><th>角色</th><td>{{ user.role }}</td></tr>
         </table>
-        <a href="{% url 'profile_edit' %}" class="btn btn-primary">编辑信息</a>
+        <a href="{% url 'profile_edit' %}" class="btn-gradient">编辑信息</a>
         {% if user.role == '班长' %}
-        <a href="{% url 'member_changes' %}" class="btn btn-warning">审核成员变更</a>
+        <a href="{% url 'member_changes' %}" class="btn-outline-red">审核成员变更</a>
         {% endif %}
         {% if user.role == '团支书' %}
-        <a href="{% url 'party_archive_list' %}" class="btn btn-info">党团员档案管理</a>
+        <a href="{% url 'party_archive_list' %}" class="btn-outline-red">党团员档案管理</a>
         {% endif %}
     </div>
     <div class="col-md-6">
@@ -38,7 +38,7 @@
 
 {% if changes %}
 <h4 class="mt-4">最近变更记录</h4>
-<table class="table table-sm">
+<table class="table-modern">
     <thead><tr><th>时间</th><th>内容</th></tr></thead>
     <tbody>
     {% for c in changes %}

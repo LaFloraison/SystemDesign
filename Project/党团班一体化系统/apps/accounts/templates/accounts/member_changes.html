@@ -15,8 +15,8 @@
         <td>{{ c.after_data }}</td>
         <td>{{ c.change_time|date:"m-d H:i" }}</td>
         <td>
-            <a href="{% url 'approve_change' c.id %}" class="btn btn-sm btn-success">通过</a>
-            <a href="{% url 'reject_change' c.id %}" class="btn btn-sm btn-danger">驳回</a>
+            <a href="{% url 'approve_change' c.id %}" class="btn-gradient btn-sm">通过</a>
+            <a href="{% url 'reject_change' c.id %}" class="btn-danger btn-sm">驳回</a>
         </td>
     </tr>
     {% endif %}

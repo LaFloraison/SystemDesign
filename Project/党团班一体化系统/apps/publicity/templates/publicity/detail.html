@@ -9,15 +9,15 @@
 <h5>材料提交</h5>
 <p>收集时间: {{ publicity.collection_start|date:"Y-m-d H:i"|default:"未设置" }} ~ {{ publicity.collection_end|date:"Y-m-d H:i"|default:"未设置" }}</p>
 {% if my_submission %}
-<p>状态: {% if my_submission.status == '已通过' %}<span class="badge bg-success">已通过</span>{% elif my_submission.status == '已驳回' %}<span class="badge bg-danger">已驳回</span>{% else %}<span class="badge bg-warning">待审核</span>{% endif %}</p>
+<p>状态: {% if my_submission.status == '已通过' %}<span class="badge-status badge-status--approved">已通过</span>{% elif my_submission.status == '已驳回' %}<span class="badge-status badge-status--rejected">已驳回</span>{% else %}<span class="badge-status badge-status--pending">待审核</span>{% endif %}</p>
 {% if my_submission.review_comment %}<p>审核意见: {{ my_submission.review_comment }}</p>{% endif %}
 {% endif %}
-<a href="{% url 'publicity_submit' publicity.id %}" class="btn btn-primary">
+<a href="{% url 'publicity_submit' publicity.id %}" class="btn-gradient">
     {% if my_submission and my_submission.status == '已驳回' %}重新提交{% else %}提交材料{% endif %}
 </a>
 {% endif %}
 {% if user.role == '团支书' %}
-<a href="{% url 'publicity_review' publicity.id %}" class="btn btn-info">审核材料</a>
+<a href="{% url 'publicity_review' publicity.id %}" class="btn-outline-red">审核材料</a>
 {% endif %}
-<a href="{% url 'publicity_list' %}" class="btn btn-secondary">返回</a>
+<a href="{% url 'publicity_list' %}" class="btn-ghost">返回</a>
 {% endblock %}

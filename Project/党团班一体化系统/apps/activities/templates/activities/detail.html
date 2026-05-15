@@ -10,17 +10,17 @@
 <div class="mt-3">{{ activity.description|linebreaks }}</div>
 <hr>
 <h5>我的状态</h5>
-<p>报名: {% if registration and registration.status == '已报名' %}<span class="badge bg-success">已报名</span>{% else %}<span class="badge bg-secondary">未报名</span>{% endif %}</p>
-<p>签到: {% if checkin and checkin.status == '已签到' %}<span class="badge bg-success">已签到</span>{% else %}<span class="badge bg-secondary">未签到</span>{% endif %}</p>
+<p>报名: {% if registration and registration.status == '已报名' %}<span class="badge-status badge-status--approved">已报名</span>{% else %}<span class="badge-status badge-status--secondary">未报名</span>{% endif %}</p>
+<p>签到: {% if checkin and checkin.status == '已签到' %}<span class="badge-status badge-status--approved">已签到</span>{% else %}<span class="badge-status badge-status--secondary">未签到</span>{% endif %}</p>
 <div class="mt-3">
     {% if not registration or registration.status == '已取消' %}
-    <a href="{% url 'activity_register' activity.id %}" class="btn btn-success">报名</a>
+    <a href="{% url 'activity_register' activity.id %}" class="btn-gradient">报名</a>
     {% else %}
-    <a href="{% url 'activity_unregister' activity.id %}" class="btn btn-warning">取消报名</a>
+    <a href="{% url 'activity_unregister' activity.id %}" class="btn-outline-red">取消报名</a>
     {% endif %}
-    <a href="{% url 'activity_checkin' activity.id %}" class="btn btn-info">签到</a>
+    <a href="{% url 'activity_checkin' activity.id %}" class="btn-outline-red">签到</a>
     {% if user.role == '班长' or user.role == '团支书' %}
-    <a href="{% url 'activity_manage' activity.id %}" class="btn btn-primary">管理</a>
+    <a href="{% url 'activity_manage' activity.id %}" class="btn-gradient">管理</a>
     {% endif %}
 </div>
 {% endblock %}

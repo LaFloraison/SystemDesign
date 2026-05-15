@@ -9,8 +9,8 @@
     <div class="mb-3"><label class="form-label">是否需要提交材料</label>{{ form.need_material }}</div>
     <div class="mb-3"><label class="form-label">材料收集开始</label>{{ form.collection_start }}</div>
     <div class="mb-3"><label class="form-label">材料收集截止</label>{{ form.collection_end }}</div>
-    <button type="submit" class="btn btn-primary">发布</button>
-    <a href="{% url 'publicity_list' %}" class="btn btn-secondary">取消</a>
+    <button type="submit" class="btn-gradient">发布</button>
+    <a href="{% url 'publicity_list' %}" class="btn-ghost">取消</a>
 </form>
 </div>
 {% endblock %}

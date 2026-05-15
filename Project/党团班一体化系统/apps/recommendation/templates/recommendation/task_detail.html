@@ -7,26 +7,26 @@
 
 {% if task.status == '报名中' %}
     {% if not my_reg %}
-    <a href="{% url 'task_register' task.id %}" class="btn btn-success">报名</a>
+    <a href="{% url 'task_register' task.id %}" class="btn-gradient">报名</a>
     {% else %}
     <span class="badge bg-{% if my_reg.status == '已通过' %}success{% elif my_reg.status == '已驳回' %}danger{% else %}warning{% endif %}">状态: {{ my_reg.status }}</span>
     {% endif %}
 {% endif %}
 
 {% if task.status == '投票中' %}
-    <a href="{% url 'vote' task.id %}" class="btn btn-warning">去投票</a>
+    <a href="{% url 'vote' task.id %}" class="btn-outline-red">去投票</a>
 {% endif %}
 
-<a href="{% url 'results' task.id %}" class="btn btn-info">查看结果</a>
+<a href="{% url 'results' task.id %}" class="btn-outline-red">查看结果</a>
 
 {% if user.role == '团支书' %}
 <hr>
-<a href="{% url 'review_registrations' task.id %}" class="btn btn-primary">审核报名</a>
+<a href="{% url 'review_registrations' task.id %}" class="btn-gradient">审核报名</a>
 {% endif %}
 
 {% if approved %}
 <h4 class="mt-4">已通过候选人</h4>
-<table class="table table-sm"><thead><tr><th>姓名</th><th>学号</th></tr></thead>
+<table class="table-modern"><thead><tr><th>姓名</th><th>学号</th></tr></thead>
 <tbody>{% for r in approved %}<tr><td>{{ r.user.name }}</td><td>{{ r.user.student_id }}</td></tr>{% endfor %}</tbody></table>
 {% endif %}
 {% endblock %}

@@ -6,7 +6,7 @@
 <hr>
 <div class="mb-4">{{ notification.content|linebreaks }}</div>
 {% if user.role == '班长' or user.role == '团支书' %}
-<a href="{% url 'notification_status' notification.id %}" class="btn btn-info">查看已读状态</a>
+<a href="{% url 'notification_status' notification.id %}" class="btn-outline-red">查看已读状态</a>
 {% endif %}
-<a href="{% url 'notification_list' %}" class="btn btn-secondary">返回列表</a>
+<a href="{% url 'notification_list' %}" class="btn-ghost">返回列表</a>
 {% endblock %}

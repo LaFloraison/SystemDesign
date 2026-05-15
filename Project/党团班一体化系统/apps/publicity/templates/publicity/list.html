@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>公示列表</h2>
     {% if user.role == '团支书' %}
-    <a href="{% url 'publicity_create' %}" class="btn btn-primary">发布公示</a>
+    <a href="{% url 'publicity_create' %}" class="btn-gradient">发布公示</a>
     {% endif %}
 </div>
 <div class="list-group">
@@ -15,7 +15,7 @@
         </div>
         <p class="mb-1 text-muted">{{ p.content|truncatechars:100 }}</p>
         <span class="badge bg-{% if p.status == '进行中' %}success{% else %}secondary{% endif %}">{{ p.status }}</span>
-        {% if p.need_material == '是' %}<span class="badge bg-info">需提交材料</span>{% endif %}
+        {% if p.need_material == '是' %}<span class="badge-status badge-status--info">需提交材料</span>{% endif %}
     </a>
     {% empty %}
     <p>暂无公示</p>

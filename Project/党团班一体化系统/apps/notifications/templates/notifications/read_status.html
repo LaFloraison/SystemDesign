@@ -9,13 +9,13 @@
         <td>{{ r.user.name }}</td>
         <td>{{ r.user.student_id }}</td>
         <td>
-            {% if r.status == '已读' %}<span class="badge bg-success">已读</span>
-            {% else %}<span class="badge bg-danger">未读</span>{% endif %}
+            {% if r.status == '已读' %}<span class="badge-status badge-status--approved">已读</span>
+            {% else %}<span class="badge-status badge-status--rejected">未读</span>{% endif %}
         </td>
         <td>{{ r.read_time|date:"Y-m-d H:i"|default:"-" }}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'notification_detail' notification.id %}" class="btn btn-secondary">返回</a>
+<a href="{% url 'notification_detail' notification.id %}" class="btn-ghost">返回</a>
 {% endblock %}
