@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>通知列表</h2>
+    {% if user.role == '班长' or user.role == '团支书' %}
+    <a href="{% url 'notification_create' %}" class="btn btn-primary">发布通知</a>
+    {% endif %}
+</div>
+<div class="list-group">
+    {% for n in notifications %}
+    <a href="{% url 'notification_detail' n.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ n.title }}</h5>
+            <small>{{ n.publish_time|date:"Y-m-d H:i" }}</small>
+        </div>
+        <p class="mb-1 text-muted">{{ n.content|truncatechars:100 }}</p>
+        {% if n.deadline %}<small class="text-danger">截止: {{ n.deadline|date:"Y-m-d H:i" }}</small>{% endif %}
+    </a>
+    {% empty %}
+    <p class="text-muted">暂无通知</p>
+    {% endfor %}
+</div>
+{% endblock %}

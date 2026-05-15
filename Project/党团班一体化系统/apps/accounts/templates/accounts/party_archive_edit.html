@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>编辑党团员档案 - {{ archive.user.name }}</h2>
+<div class="col-md-6">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">政治身份</label>{{ form.political_identity }}</div>
+    <div class="mb-3"><label class="form-label">入团时间</label>{{ form.join_league_date }}</div>
+    <div class="mb-3"><label class="form-label">入党时间</label>{{ form.join_party_date }}</div>
+    <div class="mb-3"><label class="form-label">转正时间</label>{{ form.full_member_date }}</div>
+    <div class="mb-3"><label class="form-label">介绍人姓名</label>{{ form.introducer_name }}</div>
+    <div class="mb-3"><label class="form-label">组织关系状态</label>{{ form.org_relation_status }}</div>
+    <button type="submit" class="btn btn-primary">保存</button>
+    <a href="{% url 'party_archive_list' %}" class="btn btn-secondary">取消</a>
+</form>
+</div>
+{% endblock %}

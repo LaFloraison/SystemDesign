@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>党团资料</h2>
+    <a href="{% url 'party_material_upload' %}" class="btn btn-primary">上传资料</a>
+</div>
+<table class="table table-striped">
+    <thead><tr><th>上传人</th><th>资料名称</th><th>路径</th><th>状态</th><th>审核人</th><th>时间</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for u in uploads %}
+    <tr>
+        <td>{{ u.user.name }}</td>
+        <td>{{ u.material_name }}</td>
+        <td>{{ u.material_path|truncatechars:30 }}</td>
+        <td>{% if u.status == '已通过' %}<span class="badge bg-success">已通过</span>{% elif u.status == '已驳回' %}<span class="badge bg-danger">已驳回</span>{% else %}<span class="badge bg-warning">待审核</span>{% endif %}</td>
+        <td>{{ u.reviewer.name|default:"-" }}</td>
+        <td>{{ u.upload_time|date:"m-d H:i" }}</td>
+        <td>{% if user.role == '团支书' and u.status == '待审核' %}<a href="{% url 'party_material_review' u.id %}" class="btn btn-sm btn-primary">审核</a>{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">暂无资料</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

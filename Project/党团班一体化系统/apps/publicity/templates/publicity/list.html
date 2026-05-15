@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>公示列表</h2>
+    {% if user.role == '团支书' %}
+    <a href="{% url 'publicity_create' %}" class="btn btn-primary">发布公示</a>
+    {% endif %}
+</div>
+<div class="list-group">
+    {% for p in publicities %}
+    <a href="{% url 'publicity_detail' p.id %}" class="list-group-item list-group-item-action">
+        <div class="d-flex justify-content-between">
+            <h5>{{ p.title }}</h5>
+            <small>{{ p.publish_time|date:"Y-m-d H:i" }}</small>
+        </div>
+        <p class="mb-1 text-muted">{{ p.content|truncatechars:100 }}</p>
+        <span class="badge bg-{% if p.status == '进行中' %}success{% else %}secondary{% endif %}">{{ p.status }}</span>
+        {% if p.need_material == '是' %}<span class="badge bg-info">需提交材料</span>{% endif %}
+    </a>
+    {% empty %}
+    <p>暂无公示</p>
+    {% endfor %}
+</div>
+{% endblock %}

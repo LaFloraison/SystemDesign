@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>签到 - {{ activity.name }}</h2>
+<div class="col-md-5">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">请输入签到码</label>{{ form.checkin_code }}</div>
+    <button type="submit" class="btn btn-primary">签到</button>
+</form>
+</div>
+{% endblock %}

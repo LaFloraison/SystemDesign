@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>创建活动</h2>
+<div class="col-md-8">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">活动名称</label>{{ form.name }}</div>
+    <div class="mb-3"><label class="form-label">活动描述</label>{{ form.description }}</div>
+    <div class="mb-3"><label class="form-label">活动时间</label>{{ form.activity_time }}</div>
+    <div class="mb-3"><label class="form-label">活动地点</label>{{ form.location }}</div>
+    <div class="mb-3"><label class="form-label">签到码</label>{{ form.checkin_code }}</div>
+    <div class="mb-3"><label class="form-label">签到截止时间</label>{{ form.checkin_deadline }}</div>
+    <button type="submit" class="btn btn-primary">创建</button>
+    <a href="{% url 'activity_list' %}" class="btn btn-secondary">取消</a>
+</form>
+</div>
+{% endblock %}

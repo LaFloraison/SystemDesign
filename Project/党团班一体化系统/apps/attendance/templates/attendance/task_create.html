@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>创建考勤任务</h2>
+<div class="col-md-6">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">考勤名称</label>{{ form.name }}</div>
+    <div class="mb-3"><label class="form-label">考勤时间</label>{{ form.attendance_time }}</div>
+    <div class="mb-3"><label class="form-label">考勤地点</label>{{ form.location }}</div>
+    <button type="submit" class="btn btn-primary">创建</button>
+    <a href="{% url 'attendance_records' %}" class="btn btn-secondary">取消</a>
+</form>
+</div>
+{% endblock %}

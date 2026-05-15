@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mt-5">
+    <h1>欢迎来到党团班一体化系统</h1>
+    {% if user.is_authenticated %}
+    <p class="lead">当前身份: {{ user.name }} ({{ user.role }}) - {{ user.class_name|default:"暂无班级" }}</p>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">通知中心</h5>
+                    <p class="card-text">查看班级通知和公告</p>
+                    <a href="/notifications/" class="btn btn-primary">查看通知</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">活动中心</h5>
+                    <p class="card-text">查看和报名班级活动</p>
+                    <a href="/activities/" class="btn btn-primary">查看活动</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">推优评议</h5>
+                    <p class="card-text">参与推优报名和投票</p>
+                    <a href="/recommendation/" class="btn btn-primary">查看推优</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="lead">请先登录或注册</p>
+    <div class="mt-4">
+        <a href="/accounts/login/" class="btn btn-primary btn-lg me-3">登录</a>
+        <a href="/accounts/register/" class="btn btn-outline-primary btn-lg">注册</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

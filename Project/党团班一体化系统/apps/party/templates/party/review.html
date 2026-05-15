@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>审核党团资料</h2>
+<p><strong>上传人:</strong> {{ material.user.name }}</p>
+<p><strong>资料名称:</strong> {{ material.material_name }}</p>
+<p><strong>资料路径:</strong> {{ material.material_path }}</p>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">审核结果</label>{{ form.status }}</div>
+    <div class="mb-3"><label class="form-label">审核意见</label>{{ form.review_comment }}</div>
+    <button type="submit" class="btn btn-primary">提交审核</button>
+    <a href="{% url 'party_material_list' %}" class="btn btn-secondary">取消</a>
+</form>
+{% endblock %}

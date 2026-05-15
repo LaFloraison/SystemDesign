@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>投票结果 - {{ task.name }}</h2>
+<table class="table table-striped mt-3">
+    <thead><tr><th>排名</th><th>姓名</th><th>学号</th><th>票数</th></tr></thead>
+    <tbody>
+    {% for r in results %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ r.candidate__name }}</td>
+        <td>{{ r.candidate__student_id }}</td>
+        <td><strong>{{ r.vote_count }}</strong></td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">暂无投票数据</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'task_detail' task.id %}" class="btn btn-secondary">返回</a>
+{% endblock %}

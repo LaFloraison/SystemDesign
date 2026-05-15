@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>发布推优任务</h2>
+<div class="col-md-8">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">任务名称</label>{{ form.name }}</div>
+    <div class="mb-3"><label class="form-label">报名截止时间</label>{{ form.registration_deadline }}</div>
+    <div class="mb-3"><label class="form-label">投票开始时间</label>{{ form.vote_start }}</div>
+    <div class="mb-3"><label class="form-label">投票结束时间</label>{{ form.vote_end }}</div>
+    <button type="submit" class="btn btn-primary">发布</button>
+    <a href="{% url 'task_list' %}" class="btn btn-secondary">取消</a>
+</form>
+</div>
+{% endblock %}

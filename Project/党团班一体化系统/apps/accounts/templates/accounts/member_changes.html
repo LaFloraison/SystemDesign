@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>成员变更审核</h2>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr><th>申请人</th><th>变更内容</th><th>变更前</th><th>变更后</th><th>时间</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    {% for c in changes %}
+    {% if '审核' not in c.change_content %}
+    <tr>
+        <td>{{ c.user.name }}</td>
+        <td>{{ c.change_content }}</td>
+        <td>{{ c.before_data }}</td>
+        <td>{{ c.after_data }}</td>
+        <td>{{ c.change_time|date:"m-d H:i" }}</td>
+        <td>
+            <a href="{% url 'approve_change' c.id %}" class="btn btn-sm btn-success">通过</a>
+            <a href="{% url 'reject_change' c.id %}" class="btn btn-sm btn-danger">驳回</a>
+        </td>
+    </tr>
+    {% endif %}
+    {% empty %}
+    <tr><td colspan="6" class="text-center">暂无待审核的变更</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

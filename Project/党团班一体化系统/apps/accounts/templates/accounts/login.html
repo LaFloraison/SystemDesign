@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h2 class="mb-4">登录</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">学号</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">密码</label>
+                {{ form.password }}
+            </div>
+            {% if form.errors %}
+            <div class="alert alert-danger">学号或密码错误</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">登录</button>
+            <a href="{% url 'register' %}" class="btn btn-link">没有账号？注册</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

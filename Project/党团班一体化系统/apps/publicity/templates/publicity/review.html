@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>审核材料 - {{ publicity.title }}</h2>
+<table class="table table-striped">
+    <thead><tr><th>提交人</th><th>内容</th><th>附件</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for s in submissions %}
+    <tr>
+        <td>{{ s.user.name }}</td>
+        <td>{{ s.material_content|truncatechars:50 }}</td>
+        <td>{{ s.attachment_path|truncatechars:30|default:"-" }}</td>
+        <td>{% if s.status == '已通过' %}<span class="badge bg-success">已通过</span>{% elif s.status == '已驳回' %}<span class="badge bg-danger">已驳回</span>{% else %}<span class="badge bg-warning">待审核</span>{% endif %}</td>
+        <td>
+            {% if s.status == '待审核' %}
+            <form method="post" style="display:inline">
+                {% csrf_token %}
+                <input type="hidden" name="submission_id" value="{{ s.id }}">
+                <select name="action" class="form-select form-select-sm d-inline w-auto">
+                    <option value="已通过">通过</option>
+                    <option value="已驳回">驳回</option>
+                </select>
+                <input type="text" name="review_comment" class="form-control form-control-sm d-inline w-auto" placeholder="意见">
+                <button type="submit" class="btn btn-sm btn-primary">确定</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'publicity_detail' publicity.id %}" class="btn btn-secondary">返回</a>
+{% endblock %}

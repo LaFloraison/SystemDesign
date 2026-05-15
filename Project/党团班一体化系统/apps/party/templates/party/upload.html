@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>上传党团资料</h2>
+<div class="col-md-6">
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3"><label class="form-label">资料名称</label>{{ form.material_name }}</div>
+    <div class="mb-3"><label class="form-label">资料路径</label>{{ form.material_path }}</div>
+    <button type="submit" class="btn btn-primary">上传</button>
+    <a href="{% url 'party_material_list' %}" class="btn btn-secondary">取消</a>
+</form>
+</div>
+{% endblock %}

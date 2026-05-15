@@ -1,0 +1,48 @@
+# ==================== Python / Django ====================
+__pycache__/
+*.py[cod]
+*.pyo
+*.db
+*.sqlite3
+db.sqlite3
+
+# migrations (保留 __init__.py，但不跟踪自动生成的迁移文件)
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# ==================== 环境变量 & 敏感配置 ====================
+.env
+.env.*
+!.env.example
+
+# ==================== IDE / 编辑器 ====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ==================== 虚拟环境 ====================
+venv/
+.venv/
+env/
+.env/
+conda_env/
+
+# ==================== 静态文件 / 媒体文件 ====================
+staticfiles/
+media/
+
+# ==================== 日志 ====================
+*.log
+logs/
+
+# ==================== 其他 ====================
+*.pid
+*.egg-info/
+dist/
+build/
+*.tar.gz
+*.whl

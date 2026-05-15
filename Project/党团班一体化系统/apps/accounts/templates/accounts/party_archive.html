@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>党团员档案管理</h2>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr><th>学号</th><th>姓名</th><th>政治身份</th><th>入团时间</th><th>入党时间</th><th>组织关系</th><th>操作</th></tr>
+    </thead>
+    <tbody>
+    {% for a in archives %}
+    <tr>
+        <td>{{ a.user.student_id }}</td>
+        <td>{{ a.user.name }}</td>
+        <td>{{ a.political_identity }}</td>
+        <td>{{ a.join_league_date|date:"Y-m-d"|default:"-" }}</td>
+        <td>{{ a.join_party_date|date:"Y-m-d"|default:"-" }}</td>
+        <td>{{ a.org_relation_status }}</td>
+        <td><a href="{% url 'party_archive_edit' a.user_id %}" class="btn btn-sm btn-primary">编辑</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

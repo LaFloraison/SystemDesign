@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>审核报名 - {{ task.name }}</h2>
+<table class="table table-striped">
+    <thead><tr><th>姓名</th><th>学号</th><th>时间</th><th>状态</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for r in registrations %}
+    <tr>
+        <td>{{ r.user.name }}</td>
+        <td>{{ r.user.student_id }}</td>
+        <td>{{ r.registration_time|date:"m-d H:i" }}</td>
+        <td>{% if r.status == '已通过' %}<span class="badge bg-success">已通过</span>{% elif r.status == '已驳回' %}<span class="badge bg-danger">已驳回</span>{% else %}<span class="badge bg-warning">待审核</span>{% endif %}</td>
+        <td>
+            {% if r.status == '待审核' %}
+            <form method="post" style="display:inline">
+                {% csrf_token %}
+                <input type="hidden" name="reg_id" value="{{ r.id }}">
+                <select name="action" class="form-select form-select-sm d-inline w-auto">
+                    <option value="已通过">通过</option>
+                    <option value="已驳回">驳回</option>
+                </select>
+                <input type="text" name="review_comment" class="form-control form-control-sm d-inline w-auto" placeholder="意见">
+                <button type="submit" class="btn btn-sm btn-primary">确定</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'task_detail' task.id %}" class="btn btn-secondary">返回</a>
+{% endblock %}

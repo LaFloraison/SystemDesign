@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>请假申请列表</h2>
+{% if user.role != '团支书' %}
+<a href="{% url 'leave_apply' %}" class="btn btn-warning mb-3">申请请假</a>
+{% endif %}
+<table class="table table-striped">
+    <thead><tr><th>申请人</th><th>日期</th><th>原因</th><th>状态</th><th>审核人</th><th>意见</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for l in leaves %}
+    <tr>
+        <td>{{ l.user.name }}</td>
+        <td>{{ l.leave_date|date:"Y-m-d" }}</td>
+        <td>{{ l.reason }}</td>
+        <td>{% if l.status == '已通过' %}<span class="badge bg-success">已通过</span>{% elif l.status == '已驳回' %}<span class="badge bg-danger">已驳回</span>{% else %}<span class="badge bg-warning">待审核</span>{% endif %}</td>
+        <td>{{ l.reviewer.name|default:"-" }}</td>
+        <td>{{ l.review_comment|default:"-" }}</td>
+        <td>{% if user.role == '团支书' and l.status == '待审核' %}<a href="{% url 'leave_review' l.id %}" class="btn btn-sm btn-primary">审核</a>{% endif %}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="7">暂无请假申请</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

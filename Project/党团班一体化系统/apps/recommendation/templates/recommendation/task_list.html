@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>推优任务</h2>
+    {% if user.role == '团支书' %}
+    <a href="{% url 'task_create' %}" class="btn btn-primary">发布推优任务</a>
+    {% endif %}
+</div>
+<div class="row">
+    {% for t in tasks %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ t.name }}</h5>
+                <p><small>报名截止: {{ t.registration_deadline|date:"Y-m-d H:i"|default:"未设置" }}</small></p>
+                <p><small>投票: {{ t.vote_start|date:"Y-m-d H:i"|default:"?" }} ~ {{ t.vote_end|date:"Y-m-d H:i"|default:"?" }}</small></p>
+                <span class="badge bg-{% if t.status == '报名中' %}success{% elif t.status == '投票中' %}warning{% else %}secondary{% endif %}">{{ t.status }}</span>
+                <a href="{% url 'task_detail' t.id %}" class="btn btn-sm btn-outline-primary float-end">详情</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>暂无推优任务</p>
+    {% endfor %}
+</div>
+{% endblock %}
