@@ -1,4 +1,4 @@
-# 党团班一体化系统 设计系统 / Design System
+# 党团班一体化系统 设计系统 / UI Design
 
 > 版本 1.0 | 2026-05-15
 > 技术栈: Django Templates + HTMX + Alpine.js (服务端渲染 SSR)
